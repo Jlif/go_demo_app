@@ -2,6 +2,8 @@ package main
 
 import (
 	"github.com/spf13/viper"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 	"jiangchen.tech/demo_app/config"
 	"jiangchen.tech/demo_app/config/db"
 	"jiangchen.tech/demo_app/routes"
@@ -24,7 +26,7 @@ func initConfig() {
 func initGin() {
 	// 初始化gin框架
 	r := routes.Init()
-	//r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	// 读取yml配置文件
 	port := viper.GetString("server.port")
 	if port != "" {
